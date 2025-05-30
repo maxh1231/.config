@@ -1,0 +1,43 @@
+{
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "singleQuote": false,
+    "jsxSingleQuote": true,
+    "insert_final_newline": true,
+
+    "xmlQuoteAttributes": "double",
+    "xmlSortAttributesByKey": true,
+
+    "braceStyle": "1tbs",
+
+    "language": "sql",
+    "keywordCase": "upper",
+
+    "functionNextLine": false,
+    "spaceRedirects": true,
+    "switchCaseIndents": true,
+    "indent": 4,
+
+    "overrides": [
+        {
+            "files": ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+            "options": {
+                "singleQuote": true
+            }
+        },
+        {
+            "files": "*.php",
+            "options": {
+                "parser": "php"
+            }
+        }
+    ],
+    "plugins": [
+        "prettier-plugin-go-template",
+        "@prettier/plugin-xml",
+        "@prettier/plugin-php",
+        "prettier-plugin-java",
+        "prettier-plugin-sql",
+        "prettier-plugin-sh"
+    ]
+}
