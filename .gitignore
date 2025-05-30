@@ -11,12 +11,9 @@
 .vscode/**
 .configstore
 iterm2
-nvim
-
 
 # explicit exclude
 !.vscode/extensions/
 !.vscode/extensions/extensions.json
 !.vscode/User/
 !.vscode/User/settings.json
-
