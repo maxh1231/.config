@@ -9,3 +9,4 @@ ln -sf "$HOME/.config/.vscode/extensions/extensions.json" "$HOME/.vscode/extensi
 
 ln -sf "$HOME/.config/.vscode/User/settings.json" "$HOME/.vscode/User/settings.json"
 
+cp -L "$HOME/.config/.gitconfig" "$HOME/.gitconfig"
