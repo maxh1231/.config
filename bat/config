@@ -1,0 +1,6 @@
+# ~/.config/bat/
+
+--theme=TwoDark
+--color=always
+--style=numbers,header-filename,header-filesize,snip
+--decorations=always

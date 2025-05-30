@@ -1,0 +1,22 @@
+.android
+.arduinoIDE
+.docker
+.DS_Store
+.expo
+.gradle
+.m2
+.mongodb
+.redhat
+.swiftpm
+.vscode/**
+.configstore
+iterm2
+nvim
+
+
+# explicit exclude
+!.vscode/extensions/
+!.vscode/extensions/extensions.json
+!.vscode/User/
+!.vscode/User/settings.json
+
