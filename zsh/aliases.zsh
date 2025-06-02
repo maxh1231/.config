@@ -1,6 +1,7 @@
 # ~/.oh-my-zsh/custom/
 
-alias vim="/opt/homebrew/bin/nvim"
+alias vim='TMUX_SESSION=$(tmux display -p "#S") nvim'
+alias tmn='tmux new -s $(basename "$PWD")'
 alias mongostart="brew services start mongodb-community"
 alias mongostop="brew services stop mongodb-community"
 alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
