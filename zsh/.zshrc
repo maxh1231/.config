@@ -35,3 +35,4 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # configs
 export DOCKER_CONFIG="$HOME/.config/.docker"
 export GRADLE_USER_HOME="$HOME/.config/.gradle"
+export GIT_EDITOR="nvim"
