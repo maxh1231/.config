@@ -1,0 +1,16 @@
+{
+  "connections": [
+    {
+      "name": "mysql",
+      "adapter": "mysql"
+    },
+    {
+      "name": "postgres",
+      "adapter": "postgres"
+    },
+    {
+      "name": "sqllite3",
+      "adapter": "sqllite3"
+    }
+  ]
+}
