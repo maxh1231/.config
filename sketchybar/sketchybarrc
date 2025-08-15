@@ -1,32 +1,4 @@
-PLUGIN_DIR="$CONFIG_DIR/plugins"
+#!/usr/bin/env lua
 
-##### Bar Appearance #####
-sketchybar --bar position=top height=40 blur_radius=30 color=0x40000000
-
-##### Changing Defaults #####
-default=(
-  padding_left=5
-  padding_right=5
-  icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
-  icon.padding_left=0
-  icon.padding_right=0
-  label.padding_left=8
-  label.padding_right=8
-)
-sketchybar --default "${default[@]}"
-
-##### Adding Left Items #####
-source "$CONFIG_DIR/items/aerospace.sh"
-source "$CONFIG_DIR/items/chevron.sh"
-source "$CONFIG_DIR/items/front_app.sh"
-
-##### Adding Right Items #####
-source "$CONFIG_DIR/items/clock.sh"
-source "$CONFIG_DIR/items/volume.sh"
-source "$CONFIG_DIR/items/battery.sh"
-
-##### Force all scripts to run the first time (never do this in a script) #####
-sketchybar --update
+-- Load the sketchybar-package and prepare the helper binaries
+require("init")
