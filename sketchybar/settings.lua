@@ -1,6 +1,6 @@
 return {
     paddings = 3,
-    group_paddings = 5,
+    group_paddings = 12,
     icons = "sf-symbols",
     font = {
         text = "SF Pro",

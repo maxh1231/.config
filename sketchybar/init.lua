@@ -3,6 +3,7 @@ package.cpath = package.cpath .. ";/Users/" .. os.getenv("USER") .. "/.local/sha
 sbar = require("sketchybar")
 
 -- Bundle the entire initial configuration into a single message to sketchybar
+sbar.exec("sketchybar --hotload on")
 sbar.begin_config()
 require("bar")
 require("default")

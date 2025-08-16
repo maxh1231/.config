@@ -80,7 +80,6 @@ end)
 battery:subscribe("mouse.clicked", function(env)
     local drawing = battery:query().popup.drawing
     battery:set({ popup = { drawing = "toggle" } })
-
     if drawing == "off" then
         sbar.exec("pmset -g batt", function(batt_info)
             local found, _, remaining = batt_info:find(" (%d+:%d+) remaining")
