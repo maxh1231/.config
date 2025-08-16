@@ -44,7 +44,7 @@ for _, i in ipairs(workspaces) do
     })
 
     -- Single item bracket for space items to achieve double border on highlight
-    local space_bracket = sbar.add("bracket", { space.name }, {
+    sbar.add("bracket", { space.name }, {
         background = {
             color = colors.transparent,
             border_color = colors.bg2,
@@ -61,7 +61,6 @@ for _, i in ipairs(workspaces) do
 
 
     space:subscribe("aerospace_workspace_change", function(env)
-        print(env.FOCUSED_WORKSPACE)
         local selected = env.FOCUSED_WORKSPACE == i
         space:set({
             icon = { highlight = selected, },
@@ -76,36 +75,33 @@ for _, i in ipairs(workspaces) do
 end
 
 local spaces_indicator = sbar.add("item", "spaces_indicator", {
-    padding_left = -3,
-    padding_right = 0,
     icon = {
-        padding_left = 0,
-        padding_right = 3,
+        padding_left = 8,
         color = colors.grey,
         string = icons.switch.on,
     },
     label = {
         width = 0,
-        padding_left = 0,
+        padding_left = 4,
         padding_right = 8,
         string = "Spaces",
         color = colors.bg1,
     },
     background = {
         color = colors.with_alpha(colors.grey, 0.0),
-        border_color = colors.with_alpha(colors.bg1, 0.0),
+        border_color = colors.with_alpha(colors.dark, 0.0),
     }
 })
 
 
-spaces_indicator:subscribe("swap_menus_and_spaces", function(env)
+spaces_indicator:subscribe("swap_menus_and_spaces", function(_)
     local currently_on = spaces_indicator:query().icon.value == icons.switch.on
     spaces_indicator:set({
         icon = currently_on and icons.switch.off or icons.switch.on
     })
 end)
 
-spaces_indicator:subscribe("mouse.entered", function(env)
+spaces_indicator:subscribe("mouse.entered", function(_)
     sbar.animate("tanh", 30, function()
         spaces_indicator:set({
             background = {
@@ -118,7 +114,7 @@ spaces_indicator:subscribe("mouse.entered", function(env)
     end)
 end)
 
-spaces_indicator:subscribe("mouse.exited", function(env)
+spaces_indicator:subscribe("mouse.exited", function(_)
     sbar.animate("tanh", 30, function()
         spaces_indicator:set({
             background = {
@@ -131,7 +127,7 @@ spaces_indicator:subscribe("mouse.exited", function(env)
     end)
 end)
 
-spaces_indicator:subscribe("mouse.clicked", function(env)
+spaces_indicator:subscribe("mouse.clicked", function(_)
     sbar.trigger("swap_menus_and_spaces")
 end)
 

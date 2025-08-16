@@ -1,7 +1,6 @@
 return {
-    paddings = 3,
-    group_paddings = 12,
-    icons = "sf-symbols",
+    paddings = 4,
+    group_paddings = 5,
     font = {
         text = "SF Pro",
         numbers = "SF Mono",
@@ -12,7 +11,17 @@ return {
             ["Heavy"] = "Heavy",
             ["Black"] = "Black",
         }
+    },
+    icons = "sf-symbols",
+    icon = {
+        padding_left = 7,
+        padding_right = 8,
+    },
+    label = {
+        padding_left = 0,
+        padding_right = 8
     }
+
     -- Alternatively, this is a font config for JetBrainsMono Nerd Font
     -- font = {
     --   text = "JetBrainsMono Nerd Font", -- Used for text
