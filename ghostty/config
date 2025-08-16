@@ -9,7 +9,6 @@ macos-titlebar-style = hidden
 macos-non-native-fullscreen = visible-menu
 # ~`!@$%&_+-=;':",./?\
 font-codepoint-map = "U+007E,U+0060,U+0021,U+0040,U+0024,U+0025,U+0026,U+005F,U+002B,U+002D,U+003D,U+003B,U+0027,U+003A,U+0022,U+002C,U+002E,U+002F,U+003F,U+005C=MesloLGS NF" 
-fullscreen = true
 background = #14191E
 theme = "iTerm2 Smoooooth"
 shell-integration = none

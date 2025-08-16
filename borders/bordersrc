@@ -4,8 +4,8 @@ options=(
 	style=round
 	width=3.0
 	hidpi=on
-	active_color=0xCCB0B0B0
-	inactive_color=0xFF000000
+	inactive_color=0xCCB0B0B0
+	active_color=0xFF000000
     order=above
     blacklist="firefox"
 )

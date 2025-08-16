@@ -11,7 +11,7 @@
 .vscode/**
 .configstore
 iterm2
-
+sketchybar-app-font
 # explicit exclude
 !.vscode/extensions/
 !.vscode/extensions/extensions.json
