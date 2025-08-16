@@ -11,14 +11,15 @@ local is_show_windows = true
 local toggle_windows = sbar.add("item", {
     icon = {
         string = icons.aerospace,
-        padding_right = 8,
+        padding_right = 12,
+        padding_left = 10,
     },
     label = { width = 0, y_offset = 0.5, padding_right = 15 },
     background = {
-        color = colors.with_alpha(colors.bg, 0),
-        border_color = colors.fg_highlight,
+        color = colors.bg,
+        border_color = colors.border,
+        border_width = 2
     },
-    padding_right = 0,
 })
 
 -- Hover animations provide visual feedback for interactive elements
@@ -27,7 +28,7 @@ toggle_windows:subscribe("mouse.entered", function()
         toggle_windows:set({
             label = { string = is_show_windows and icons.chevron.left or icons.chevron.right, width = "dynamic" },
             background = {
-                color = colors.with_alpha(colors.bg, 1),
+                color = colors.bg,
                 -- border_width = 2,
             },
         })
@@ -39,7 +40,7 @@ toggle_windows:subscribe("mouse.exited", function()
         toggle_windows:set({
             label = { width = 0 },
             background = {
-                color = colors.with_alpha(colors.bg, 0),
+                color = colors.bg
                 -- border_width = 0,
             },
         })
@@ -67,8 +68,8 @@ toggle_windows:subscribe("aerospace_mode_change", function(ENV)
                 },
                 background = {
                     color = colors.with_alpha(colors.bg, 0),
-                    border_color = colors.fg_highlight,
-                    border_width = 0,
+                    border_color = colors.red,
+                    border_width = 2,
                 },
             })
         end
@@ -103,7 +104,7 @@ local function updateWindows(workspace_index)
                         icon = { drawing = true },
                         label = { drawing = true, string = icon_line },
                         background = { drawing = true },
-                        padding_right = 1,
+                        -- padding_right = 1,
                         padding_left = 2,
                     })
                     return
@@ -135,9 +136,10 @@ for workspace_index = 1, max_workspaces do
     local workspace = sbar.add("item", {
         icon = {
             font = { family = settings.font.numbers },
+            color = colors.fg_secondary,
             string = workspace_index,
-            padding_left = 5,
-            padding_right = 8,
+            padding_left = 14,
+            padding_right = 4,
         },
         label = {
             padding_right = 20,
@@ -149,7 +151,8 @@ for workspace_index = 1, max_workspaces do
         padding_right = 1,
         padding_left = 2,
         background = {
-            border_color = colors.fg_highlight,
+            border_color = colors.border,
+            border_width = 2
         },
     })
 
@@ -161,10 +164,14 @@ for workspace_index = 1, max_workspaces do
 
         sbar.animate("tanh", 10, function()
             workspace:set({
-                icon = { highlight = is_focused },
-                label = { highlight = is_focused },
+                icon = {
+                    highlight = is_focused,
+                    highlight_color = colors.fg
+                },
+                label = { highlight = is_focused, highlight_color = colors.fg },
                 background = {
-                    -- border_width = is_focused and 2 or 0,
+                    border_width = is_focused and 2 or 0,
+                    border_color = colors.fg
                 },
             })
         end)
@@ -183,9 +190,15 @@ for workspace_index = 1, max_workspaces do
     workspace:subscribe("mouse.entered", function()
         sbar.animate("tanh", 10, function()
             workspace:set({
-                icon = { highlight = true },
-                label = { highlight = true },
-                -- background = { border_width = 2 },
+                icon = {
+                    highlight = true,
+                    highlight_color = colors.fg
+                },
+                label = { highlight = true, highlight_color = colors.fg },
+                background = {
+                    border_width = true and 2 or 0,
+                    border_color = colors.fg
+                },
             })
         end)
     end)
@@ -209,9 +222,15 @@ for workspace_index = 1, max_workspaces do
     updateWindows(workspace_index)
     sbar.exec("aerospace list-workspaces --focused", function(focused_workspace)
         workspaces[tonumber(focused_workspace)]:set({
-            icon = { highlight = true },
-            label = { highlight = true },
-            -- background = { border_width = 2 },
+            icon = {
+                highlight = true,
+                highlight_color = colors.fg
+            },
+            label = { highlight = true, highlight_color = colors.fg },
+            background = {
+                border_width = true and 2 or 0,
+                border_color = colors.fg
+            },
         })
     end)
 end
