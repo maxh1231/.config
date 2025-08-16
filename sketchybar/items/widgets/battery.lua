@@ -4,15 +4,17 @@ local settings = require("settings")
 
 local battery = sbar.add("item", "widgets.battery", {
     position = "right",
-    icon = {
+    icon = { string = icons.cpu },
+    label = {
         font = {
-            style = settings.font.style_map["Regular"],
-            size = 19.0,
-        }
+            family = settings.font.numbers,
+        },
+        color = colors.fg,
+        width = 0,
     },
-    label = { font = { family = settings.font.numbers } },
+    padding_left = 0,
+    padding_right = 0,
     update_freq = 180,
-    popup = { align = "center" }
 })
 
 local remaining_time = sbar.add("item", {
@@ -20,15 +22,14 @@ local remaining_time = sbar.add("item", {
     icon = {
         string = "Time remaining:",
         width = 100,
-        align = "left"
+        align = "left",
     },
     label = {
         string = "??:??h",
         width = 100,
-        align = "right"
+        align = "right",
     },
 })
-
 
 battery:subscribe({ "routine", "power_source_change", "system_woke" }, function()
     sbar.exec("pmset -g batt", function(batt_info)
@@ -70,7 +71,7 @@ battery:subscribe({ "routine", "power_source_change", "system_woke" }, function(
         battery:set({
             icon = {
                 string = icon,
-                color = color
+                color = color,
             },
             label = { string = lead .. label },
         })
@@ -80,6 +81,7 @@ end)
 battery:subscribe("mouse.clicked", function(env)
     local drawing = battery:query().popup.drawing
     battery:set({ popup = { drawing = "toggle" } })
+
     if drawing == "off" then
         sbar.exec("pmset -g batt", function(batt_info)
             local found, _, remaining = batt_info:find(" (%d+:%d+) remaining")
@@ -89,11 +91,18 @@ battery:subscribe("mouse.clicked", function(env)
     end
 end)
 
-sbar.add("bracket", "widgets.battery.bracket", { battery.name }, {
-    background = { color = colors.bg1 }
-})
+battery:subscribe("mouse.entered", function(env)
+    sbar.animate("tanh", 30, function()
+        battery:set({
+            label = { width = "dynamic" },
+        })
+    end)
+end)
 
-sbar.add("item", "widgets.battery.padding", {
-    position = "right",
-    width = settings.group_paddings
-})
+battery:subscribe("mouse.exited", function(env)
+    sbar.animate("tanh", 30, function()
+        battery:set({
+            label = { width = 0 },
+        })
+    end)
+end)

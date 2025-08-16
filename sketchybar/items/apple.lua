@@ -10,10 +10,12 @@ local apple = sbar.add("item", {
         string = icons.apple,
         padding_right = 8,
         padding_left = 8,
+        color = colors.white
     },
     label = { drawing = false },
     background = {
-        color = colors.bg2,
+        drawing = false,
+        color = colors.bg1,
         border_color = colors.black,
         border_width = 1
     },
@@ -25,6 +27,7 @@ local apple = sbar.add("item", {
 -- Double border for apple using a single item bracket
 sbar.add("bracket", { apple.name }, {
     background = {
+        drawing = false,
         color = colors.transparent,
         height = 30,
         border_color = colors.grey,

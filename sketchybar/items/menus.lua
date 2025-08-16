@@ -22,7 +22,7 @@ for i = 1, max_items, 1 do
         icon = { drawing = false },
         label = {
             font = {
-                style = settings.font.style_map[i == 1 and "Heavy" or "Semibold"]
+                style = settings.font.style_map[i == 1 and "Heavy" or "Semibold"],
             },
             padding_left = 6,
             padding_right = 6,
@@ -33,21 +33,21 @@ for i = 1, max_items, 1 do
     menu_items[i] = menu
 end
 
-sbar.add("bracket", { '/menu\\..*/' }, {
-    background = { color = colors.bg1 }
+sbar.add("bracket", { "/menu\\..*/" }, {
+    background = { color = colors.bg1 },
 })
 
 local menu_padding = sbar.add("item", "menu.padding", {
     drawing = false,
-    width = 5
+    width = 5,
 })
 
 local function update_menus(env)
     sbar.exec("$CONFIG_DIR/helpers/menus/bin/menus -l", function(menus)
-        sbar.set('/menu\\..*/', { drawing = false })
+        sbar.set("/menu\\..*/", { drawing = false })
         menu_padding:set({ drawing = true })
         id = 1
-        for menu in string.gmatch(menus, '[^\r\n]+') do
+        for menu in string.gmatch(menus, "[^\r\n]+") do
             if id < max_items then
                 menu_items[id]:set({ label = menu, drawing = true })
             else

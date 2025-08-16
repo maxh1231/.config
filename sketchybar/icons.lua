@@ -8,7 +8,22 @@ local icons = {
         gear = "􀍟",
         cpu = "􀫥",
         clipboard = "􀉄",
+        music = "􀑪",
+        aerospace = "􀏝",
+        timer = "􀐱",
+        todo = {
+            icon = "􀓞",
+            new = "􀁌",
+            check = "􀁢",
+        },
 
+        chevron = {
+            left = "􀆉",
+            right = "􀆊",
+        },
+        mail = {
+            unread = "􀍛",
+        },
         switch = {
             on = "􁏮",
             off = "􁏯",
@@ -26,7 +41,7 @@ local icons = {
             _50 = "􀺶",
             _25 = "􀛩",
             _0 = "􀛪",
-            charging = "􀢋"
+            charging = "􀢋",
         },
         wifi = {
             upload = "􀄨",
@@ -38,7 +53,11 @@ local icons = {
         media = {
             back = "􀊊",
             forward = "􀊌",
+            skip = "􀊐",
             play_pause = "􀊈",
+            play = "􀊄",
+            pause = "􀊅",
+            reset = "􀍿",
         },
     },
 
@@ -68,14 +87,14 @@ local icons = {
             _50 = "",
             _25 = "",
             _0 = "",
-            charging = ""
+            charging = "",
         },
         wifi = {
             upload = "",
             download = "",
             connected = "󰖩",
             disconnected = "󰖪",
-            router = "Missing Icon"
+            router = "Missing Icon",
         },
         media = {
             back = "",

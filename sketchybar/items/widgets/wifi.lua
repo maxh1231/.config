@@ -5,13 +5,13 @@ local settings = require("settings")
 -- Execute the event provider binary which provides the event "network_update"
 -- for the network interface "en0", which is fired every 2.0 seconds.
 sbar.exec(
-"killall network_load >/dev/null; $CONFIG_DIR/helpers/event_providers/network_load/bin/network_load en0 network_update 2.0")
+    "killall network_load >/dev/null; $CONFIG_DIR/helpers/event_providers/network_load/bin/network_load en0 network_update 2.0"
+)
 
 local popup_width = 250
 
 local wifi_up = sbar.add("item", "widgets.wifi1", {
     position = "right",
-    padding_left = -5,
     width = 0,
     icon = {
         padding_right = 0,
@@ -20,6 +20,7 @@ local wifi_up = sbar.add("item", "widgets.wifi1", {
             size = 9.0,
         },
         string = icons.wifi.upload,
+        width = 0,
     },
     label = {
         font = {
@@ -29,6 +30,7 @@ local wifi_up = sbar.add("item", "widgets.wifi1", {
         },
         color = colors.red,
         string = "??? Bps",
+        width = 0,
     },
     y_offset = 4,
 })
@@ -43,6 +45,7 @@ local wifi_down = sbar.add("item", "widgets.wifi2", {
             size = 9.0,
         },
         string = icons.wifi.download,
+        width = 0,
     },
     label = {
         font = {
@@ -52,30 +55,34 @@ local wifi_down = sbar.add("item", "widgets.wifi2", {
         },
         color = colors.blue,
         string = "??? Bps",
+        width = 0,
     },
+    background = { drawing = false },
     y_offset = -4,
 })
 
 local wifi = sbar.add("item", "widgets.wifi.padding", {
     position = "right",
     label = { drawing = false },
+    padding_left = 0,
+    padding_right = 0,
 })
 
 -- Background around the item
 local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", {
     wifi.name,
     wifi_up.name,
-    wifi_down.name
+    wifi_down.name,
 }, {
-    background = { color = colors.bg1 },
-    popup = { align = "center", height = 30 }
+    background = { color = colors.bg },
+    popup = { align = "center", height = 30, background = { corner_radius = 12 } },
 })
 
 local ssid = sbar.add("item", {
     position = "popup." .. wifi_bracket.name,
     icon = {
         font = {
-            style = settings.font.style_map["Bold"]
+            style = settings.font.style_map["Bold"],
         },
         string = icons.wifi.router,
     },
@@ -84,16 +91,16 @@ local ssid = sbar.add("item", {
     label = {
         font = {
             size = 15,
-            style = settings.font.style_map["Bold"]
+            style = settings.font.style_map["Bold"],
         },
         max_chars = 18,
         string = "????????????",
     },
     background = {
         height = 2,
-        color = colors.grey,
-        y_offset = -15
-    }
+        color = colors.fg_secondary,
+        y_offset = -15,
+    },
 })
 
 local hostname = sbar.add("item", {
@@ -108,7 +115,7 @@ local hostname = sbar.add("item", {
         string = "????????????",
         width = popup_width / 2,
         align = "right",
-    }
+    },
 })
 
 local ip = sbar.add("item", {
@@ -122,7 +129,7 @@ local ip = sbar.add("item", {
         string = "???.???.???.???",
         width = popup_width / 2,
         align = "right",
-    }
+    },
 })
 
 local mask = sbar.add("item", {
@@ -136,7 +143,7 @@ local mask = sbar.add("item", {
         string = "???.???.???.???",
         width = popup_width / 2,
         align = "right",
-    }
+    },
 })
 
 local router = sbar.add("item", {
@@ -153,24 +160,22 @@ local router = sbar.add("item", {
     },
 })
 
-sbar.add("item", { position = "right", width = settings.group_paddings })
-
 wifi_up:subscribe("network_update", function(env)
-    local up_color = (env.upload == "000 Bps") and colors.grey or colors.red
-    local down_color = (env.download == "000 Bps") and colors.grey or colors.blue
+    local up_color = (env.upload == "000 Bps") and colors.fg_secondary or colors.red
+    local down_color = (env.download == "000 Bps") and colors.fg_secondary or colors.blue
     wifi_up:set({
         icon = { color = up_color },
         label = {
             string = env.upload,
-            color = up_color
-        }
+            color = up_color,
+        },
     })
     wifi_down:set({
         icon = { color = down_color },
         label = {
             string = env.download,
-            color = down_color
-        }
+            color = down_color,
+        },
     })
 end)
 
@@ -180,7 +185,7 @@ wifi:subscribe({ "wifi_change", "system_woke" }, function(env)
         wifi:set({
             icon = {
                 string = connected and icons.wifi.connected or icons.wifi.disconnected,
-                color = connected and colors.white or colors.red,
+                color = connected and colors.fg or colors.red,
             },
         })
     end)
@@ -188,6 +193,29 @@ end)
 
 local function hide_details()
     wifi_bracket:set({ popup = { drawing = false } })
+    sbar.animate("tanh", 30, function()
+        wifi_up:set({
+            icon = { width = 0 },
+            label = { width = 0 },
+        })
+        wifi_down:set({
+            icon = { width = 0 },
+            label = { width = 0 },
+        })
+    end)
+end
+
+local function show_details()
+    sbar.animate("tanh", 30, function()
+        wifi_up:set({
+            icon = { width = "dynamic" },
+            label = { width = "dynamic" },
+        })
+        wifi_down:set({
+            icon = { width = "dynamic" },
+            label = { width = "dynamic" },
+        })
+    end)
 end
 
 local function toggle_details()
@@ -214,6 +242,7 @@ local function toggle_details()
     end
 end
 
+wifi:subscribe("mouse.entered", show_details)
 wifi_up:subscribe("mouse.clicked", toggle_details)
 wifi_down:subscribe("mouse.clicked", toggle_details)
 wifi:subscribe("mouse.clicked", toggle_details)
@@ -221,7 +250,7 @@ wifi:subscribe("mouse.exited.global", hide_details)
 
 local function copy_label_to_clipboard(env)
     local label = sbar.query(env.NAME).label.value
-    sbar.exec("echo \"" .. label .. "\" | pbcopy")
+    sbar.exec('echo "' .. label .. '" | pbcopy')
     sbar.set(env.NAME, { label = { string = icons.clipboard, align = "center" } })
     sbar.delay(1, function()
         sbar.set(env.NAME, { label = { string = label, align = "right" } })

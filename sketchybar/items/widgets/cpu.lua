@@ -6,37 +6,27 @@ local settings = require("settings")
 -- the cpu load data, which is fired every 2.0 seconds.
 sbar.exec("killall cpu_load >/dev/null; $CONFIG_DIR/helpers/event_providers/cpu_load/bin/cpu_load cpu_update 2.0")
 
-local cpu = sbar.add("graph", "widgets.cpu", 42, {
+local cpu = sbar.add("item", {
     position = "right",
-    graph = { color = colors.blue },
-    background = {
-        height = 22,
-        color = { alpha = 0 },
-        border_color = { alpha = 0 },
-        drawing = true,
-    },
-    icon = { string = icons.cpu },
+    icon = { string = icons.cpu, color = colors.fg },
     label = {
-        string = "cpu ??%",
+        string = "??%",
         font = {
             family = settings.font.numbers,
-            style = settings.font.style_map["Bold"],
-            size = 9.0,
         },
-        align = "right",
-        padding_right = 0,
+        color = colors.fg,
         width = 0,
-        y_offset = 4
     },
-    padding_right = settings.paddings + 6
+    background = {
+        color = colors.with_alpha(colors.bg, 1),
+    },
 })
 
 cpu:subscribe("cpu_update", function(env)
     -- Also available: env.user_load, env.sys_load
     local load = tonumber(env.total_load)
-    cpu:push({ load / 100. })
 
-    local color = colors.blue
+    local color = colors.fg
     if load > 30 then
         if load < 60 then
             color = colors.yellow
@@ -48,8 +38,10 @@ cpu:subscribe("cpu_update", function(env)
     end
 
     cpu:set({
-        graph = { color = color },
-        label = "cpu " .. env.total_load .. "%",
+        icon = {
+            color = color,
+        },
+        label = env.total_load .. "%",
     })
 end)
 
@@ -57,13 +49,18 @@ cpu:subscribe("mouse.clicked", function(env)
     sbar.exec("open -a 'Activity Monitor'")
 end)
 
--- Background around the cpu item
-sbar.add("bracket", "widgets.cpu.bracket", { cpu.name }, {
-    background = { color = colors.grey }
-})
+cpu:subscribe("mouse.entered", function(env)
+    sbar.animate("tanh", 30, function()
+        cpu:set({
+            label = { width = "dynamic" },
+        })
+    end)
+end)
 
--- Background around the cpu item
-sbar.add("item", "widgets.cpu.padding", {
-    position = "right",
-    width = settings.group_paddings
-})
+cpu:subscribe("mouse.exited", function(env)
+    sbar.animate("tanh", 30, function()
+        cpu:set({
+            label = { width = 0 },
+        })
+    end)
+end)
