@@ -29,7 +29,6 @@ toggle_windows:subscribe("mouse.entered", function()
             label = { string = is_show_windows and icons.chevron.left or icons.chevron.right, width = "dynamic" },
             background = {
                 color = colors.bg,
-                -- border_width = 2,
             },
         })
     end)
@@ -41,7 +40,6 @@ toggle_windows:subscribe("mouse.exited", function()
             label = { width = 0 },
             background = {
                 color = colors.bg
-                -- border_width = 0,
             },
         })
     end)
@@ -55,11 +53,6 @@ toggle_windows:subscribe("aerospace_mode_change", function(ENV)
                 icon = {
                     color = colors.yellow,
                 },
-                background = {
-                    -- color = colors.with_alpha(colors.yellow, 1),
-                    -- border_color = colors.white,
-                    -- border_width = 2,
-                },
             })
         else
             toggle_windows:set({
@@ -67,8 +60,7 @@ toggle_windows:subscribe("aerospace_mode_change", function(ENV)
                     color = colors.fg,
                 },
                 background = {
-                    color = colors.with_alpha(colors.bg, 0),
-                    border_color = colors.red,
+                    color = colors.bg,
                     border_width = 2,
                 },
             })
