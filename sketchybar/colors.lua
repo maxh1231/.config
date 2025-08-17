@@ -10,7 +10,6 @@ end
 colors.with_alpha = with_alpha
 
 local theme = {
-    -- Base16 Default Dark Theme
     dark = 0xff181818,
     dark_grey = 0xff282828,
     grey = 0xff383838,

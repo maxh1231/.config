@@ -1,5 +1,5 @@
 -- Require the sketchybar module
-sbar = require("sketchybar")
+_G.sbar = require("sketchybar")
 
 -- Bundle the entire initial configuration into a single message to sketchybar
 sbar.exec("sketchybar --hotload on")

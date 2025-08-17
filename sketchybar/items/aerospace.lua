@@ -3,7 +3,7 @@ local colors = require("colors")
 local settings = require("settings")
 local app_icons = require("helpers.icon_map")
 
-local max_workspaces = 9
+local max_workspaces = 5
 local focused_workspace_index = nil
 local is_show_windows = true
 
@@ -87,7 +87,7 @@ local function updateWindows(workspace_index)
     sbar.exec(get_windows, function(open_windows)
         local icon_line = ""
         local no_app = true
-        for i, open_window in ipairs(open_windows) do
+        for _, open_window in ipairs(open_windows) do
             no_app = false
             local app = open_window["app-name"]
             -- Fallback to default icon if app-specific icon isn't found
@@ -158,6 +158,7 @@ for workspace_index = 1, max_workspaces do
 
     workspaces[workspace_index] = workspace
 
+    -- Updates highlight of focused workspace when workspace changes
     workspace:subscribe("aerospace_workspace_change", function(env)
         focused_workspace_index = tonumber(env.FOCUSED_WORKSPACE)
         local is_focused = focused_workspace_index == workspace_index
@@ -187,6 +188,7 @@ for workspace_index = 1, max_workspaces do
         sbar.exec(focus_workspace)
     end)
 
+    -- Workspace hover effects
     workspace:subscribe("mouse.entered", function()
         sbar.animate("tanh", 10, function()
             workspace:set({
@@ -203,8 +205,8 @@ for workspace_index = 1, max_workspaces do
         end)
     end)
 
+    -- Maintain highlight if this is the focused workspace
     workspace:subscribe("mouse.exited", function()
-        -- Maintain highlight if this is the focused workspace
         if workspace_index == focused_workspace_index then
             return
         end
@@ -244,7 +246,7 @@ toggle_windows:subscribe("mouse.clicked", function()
                 string = is_show_windows and icons.chevron.left or icons.chevron.right,
             },
         })
-        for i, workspace in ipairs(workspaces) do
+        for _, workspace in ipairs(workspaces) do
             workspace:set({
                 icon = { padding_right = is_show_windows and 8 or 15 },
                 label = { width = is_show_windows and "dynamic" or 0 },

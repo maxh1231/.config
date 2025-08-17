@@ -45,11 +45,11 @@ cpu:subscribe("cpu_update", function(env)
     })
 end)
 
-cpu:subscribe("mouse.clicked", function(env)
+cpu:subscribe("mouse.clicked", function(_)
     sbar.exec("open -a 'Activity Monitor'")
 end)
 
-cpu:subscribe("mouse.entered", function(env)
+cpu:subscribe("mouse.entered", function(_)
     sbar.animate("tanh", 30, function()
         cpu:set({
             label = { width = "dynamic" },
@@ -57,7 +57,7 @@ cpu:subscribe("mouse.entered", function(env)
     end)
 end)
 
-cpu:subscribe("mouse.exited", function(env)
+cpu:subscribe("mouse.exited", function(_)
     sbar.animate("tanh", 30, function()
         cpu:set({
             label = { width = 0 },

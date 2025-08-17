@@ -16,7 +16,6 @@ sbar.add("item", {
         border_color = colors.border,
         border_width = 2
     },
-    padding_left = 1,
     padding_right = 1,
     click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s 0"
 })

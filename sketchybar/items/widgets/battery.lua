@@ -78,7 +78,7 @@ battery:subscribe({ "routine", "power_source_change", "system_woke" }, function(
     end)
 end)
 
-battery:subscribe("mouse.clicked", function(env)
+battery:subscribe("mouse.clicked", function(_)
     local drawing = battery:query().popup.drawing
     battery:set({ popup = { drawing = "toggle" } })
 
@@ -91,7 +91,7 @@ battery:subscribe("mouse.clicked", function(env)
     end
 end)
 
-battery:subscribe("mouse.entered", function(env)
+battery:subscribe("mouse.entered", function(_)
     sbar.animate("tanh", 30, function()
         battery:set({
             label = { width = "dynamic" },
@@ -99,7 +99,7 @@ battery:subscribe("mouse.entered", function(env)
     end)
 end)
 
-battery:subscribe("mouse.exited", function(env)
+battery:subscribe("mouse.exited", function(_)
     sbar.animate("tanh", 30, function()
         battery:set({
             label = { width = 0 },
