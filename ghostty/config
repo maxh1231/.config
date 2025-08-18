@@ -4,7 +4,7 @@ theme = "iTerm2 Smoooooth"
 #theme = "GitHub Dark"
 #theme = "MaterialDark"
 
-
+font-size = 22
 font-feature = -dlig
 font-feature = -calt
 font-feature = -liga
@@ -19,4 +19,3 @@ cursor-style-blink = false
 cursor-style = block
 macos-titlebar-style = hidden
 macos-non-native-fullscreen = visible-menu
-
