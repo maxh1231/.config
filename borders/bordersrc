@@ -7,7 +7,7 @@ options=(
 	inactive_color=0xc02c2e34
 	background_color=0x302c2e34
     order=above
-    blacklist="firefox"
+    blacklist="firefox,League of Legends"
 )
 
 borders "${options[@]}"

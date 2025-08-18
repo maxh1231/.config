@@ -3,7 +3,7 @@ local colors = require("colors")
 local settings = require("settings")
 local app_icons = require("helpers.icon_map")
 
-local max_workspaces = 5
+local max_workspaces = 9
 local focused_workspace_index = nil
 local is_show_windows = true
 
