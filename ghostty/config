@@ -1,16 +1,22 @@
-font-family = "MesloLGS Nerd Font Mono"
-font-size = 22
+theme = "iTerm2 Smoooooth"
+#theme = "Argonaut"
+#theme = "GitHub-Dark-Dimmed"
+#theme = "GitHub Dark"
+#theme = "MaterialDark"
+
+
+font-feature = -dlig
 font-feature = -calt
+font-feature = -liga
 font-thicken = true
+shell-integration = none
 bold-is-bright = true
+adjust-cell-width = -4%
+mouse-hide-while-typing = true
+background-opacity = .90
+confirm-close-surface = false
 cursor-style-blink = false
 cursor-style = block
 macos-titlebar-style = hidden
 macos-non-native-fullscreen = visible-menu
-# ~`!@$%&_+-=;':",./?\
-font-codepoint-map = "U+007E,U+0060,U+0021,U+0040,U+0024,U+0025,U+0026,U+005F,U+002B,U+002D,U+003D,U+003B,U+0027,U+003A,U+0022,U+002C,U+002E,U+002F,U+003F,U+005C=MesloLGS NF" 
-background = #14191E
-theme = "iTerm2 Smoooooth"
-shell-integration = none
-unfocused-split-opacity = .5
-adjust-cell-width = -4%
+

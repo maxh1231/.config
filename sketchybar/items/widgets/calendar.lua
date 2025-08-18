@@ -8,7 +8,7 @@ local cal = sbar.add("item", {
         },
     },
     label = {
-        width = 49,
+        width = 59,
         align = "right",
         font = { family = settings.font.numbers },
     },
@@ -18,5 +18,5 @@ local cal = sbar.add("item", {
 })
 
 cal:subscribe({ "forced", "routine", "system_woke" }, function(_)
-    cal:set({ icon = os.date("%a. %d %b."), label = os.date("%H:%M") })
+    cal:set({ icon = os.date("%a. %d %b."), label = os.date("%I:%M %p"):gsub("^0", "") })
 end)
