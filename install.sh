@@ -24,7 +24,7 @@ brew install zsh-syntax-highlighting
 npm install -g @anthropic-ai/claude-code
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/kvndrsslr/sketchybar-app-font.git && cd sketchybar-app-font && pnpm install && pnpm run build:install && cd
-
+(git clone https://github.com/FelixKratz/SbarLua.git /tmp/SbarLua && cd /tmp/SbarLua/ && make install && rm -rf /tmp/SbarLua/)
 
 
 
