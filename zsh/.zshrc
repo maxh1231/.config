@@ -11,28 +11,23 @@ source $ZSH/oh-my-zsh.sh
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="powerlevel10k/powerlevel10k"
-source $ZSH/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
 plugins=(git)
 
-# Set up paths
-export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
-export PATH=$PATH:/Library/Java/JavaVirtualMachines/jdk-23.jdk/Contents/Home
+# Needed for some tmux scripts
 export PATH=~/.local/bin/:$PATH
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
-
-# Custom fzf config
 source "$HOME/.config/.fzfrc"
 
 # Enable syntax highlighting
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # configs
-export DOCKER_CONFIG="$HOME/.config/.docker"
-export GRADLE_USER_HOME="$HOME/.config/.gradle"
 export GIT_EDITOR="nvim"

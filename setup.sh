@@ -6,7 +6,6 @@ ln -sf "$HOME/.config/zsh/aliases.zsh" "$HOME/.oh-my-zsh/custom/aliases.zsh"
 ln -sf "$HOME/.config/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
 
 ln -sf "$HOME/.config/.vscode/extensions/extensions.json" "$HOME/.vscode/extensions/extensions.json"
-
 ln -sf "$HOME/.config/.vscode/User/settings.json" "$HOME/.vscode/User/settings.json"
 
 ln -sf "$HOME/.config/tmux/.tmux.conf" "$HOME/.tmux.conf"
@@ -36,3 +35,5 @@ link_script "tmux-cht.sh"
 link_script "tmux-sessionizer"
 
 cp -L "$HOME/.config/.gitconfig" "$HOME/.gitconfig"
+
+ln -sf "$HOME/.config/.claude/settings.json" "$HOME/.claude/"

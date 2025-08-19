@@ -1,0 +1,22 @@
+{
+    "cleanupPeriodDays": 7,
+    "permissions": {
+        "allow": [
+            "WebFetch",
+            "WebSearch" 
+        ],
+        "deny": [
+            "Read(./.env)",
+            "Read(./.env.*)",
+            "Read(./secrets/**)",
+            "Read(./config/credentials.json)",
+            "Read(./build)",
+            "Read(./dir)"
+        ],
+        "defaultMode": "plan"
+    },
+    "statusLine": {
+        "type": "command",
+        "command": "input=$(cat); current_dir=$(echo \"$input\" | jq -r '.workspace.current_dir'); base_dir=$(basename \"$current_dir\"); git_info=\"\"; if git rev-parse --git-dir > /dev/null 2>&1; then branch=$(git branch --show-current 2>/dev/null || git rev-parse --short HEAD 2>/dev/null); if [ -n \"$branch\" ]; then git_status=\"\"; if ! git diff --quiet 2>/dev/null || ! git diff --cached --quiet 2>/dev/null || [ -n \"$(git ls-files --others --exclude-standard 2>/dev/null)\" ]; then git_status=\"*\"; fi; git_info=\" $branch$git_status\"; fi; fi; printf \"\\033[2m%s%s\\033[0m\" \"$base_dir\" \"$git_info\""
+    }
+}
